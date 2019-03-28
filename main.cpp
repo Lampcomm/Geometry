@@ -78,6 +78,25 @@ int main(int argc, char** argv)
                 er.push_back(ans);
             } else if (circle(i) == 1)
                 out.push_back(i);
+        } else if (i[0] == 't') {
+            if (triangle(i) == 2) {
+                ans.first = i;
+                ans.second = "\n\tError: invalid input format";
+                er.push_back(ans);
+            } else if (triangle(i) == 3) {
+                ans.first = i;
+                ans.second = "\n\n\tError: unknown shape '";
+                size_t is = 0;
+                temp.clear();
+                while (i[is] != '(' && i[is] != ')' && is < i.size()) {
+                    temp.push_back(i[is]);
+                    is++;
+                }
+                temp.insert(temp.size(), "'");
+                ans.second.insert(ans.second.size(), temp);
+                er.push_back(ans);
+            } else if (triangle(i) == 1)
+                out.push_back(i);
         } else {
             ans.first = i;
             ans.second = "\n\n\tError: unknown shape '";
