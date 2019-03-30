@@ -114,8 +114,9 @@ int triangle(string str)
         }
     }
     set<pair<int, int>> se;
-    pair<int, int> t;
+    pair<int, int> t, b[4];
     i = 10;
+    j = 0;
     temp.clear();
     stringstream ss;
     while (str[i] != ')') {
@@ -127,11 +128,26 @@ int triangle(string str)
         ss >> t.first;
         ss >> t.second;
         se.insert(t);
+        b[j] = t;
         temp.clear();
         ss.clear();
         i++;
+        j++;
     }
     if (se.size() != 3)
         return 2;
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t j = 0; j < 3; j++) {
+            if (j == i)
+                continue;
+            for (size_t o = 0; o < 3; o++) {
+                if (o == i || o == j)
+                    continue;
+                if ((b[o].first - b[i].first) * (b[j].second - b[i].second)
+                    == (b[o].second - b[i].second) * (b[j].first - b[i].first))
+                    return 2;
+            }
+        }
+    }
     return 1;
 }
