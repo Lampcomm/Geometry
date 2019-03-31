@@ -1,4 +1,3 @@
-VPATH := src build
 CC = g++
 EXECUTABLE = bin/main.out
 CFLAGS = -Wall -Werror -c -MD
