@@ -1,7 +1,20 @@
-main.out:main.o
-	g++ main.o -o main.out -Wall
-main.o:Test.hpp
+CC = g++
+EXECUTABLE = bin/main.out
+CFLAGS = -Wall -Werror -c -MD
+SOURCES = $(wildcard $(addprefix src/,*.cpp))
+OBJECTS = $(patsubst $(addprefix src/, %.cpp),$(addprefix build/, %.o),$(wildcard $(addprefix src/, *.cpp)))
+DEPENDENCIES = $(patsubst $(addprefix build/, %.o), $(addprefix build/, %.d), $(wildcard $(addprefix build/, *.o)))
+
+all : $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE) : $(OBJECTS)
+	$(CC) $^ -o $@
+
+build/%.o : src/%.cpp
+	$(CC) $(CFLAGS) $< -o $@
 
 .PHONY:clean
 clean:
-	rm *.o
+	rm $(OBJECTS) $(EXECUTABLE) $(DEPENDENCIES)
+
+include $(wildcard $(addprefix build/, *.d))

@@ -1,9 +1,9 @@
-#include "Test.hpp"
-#include <SFML/Graphics.hpp>
+//#include "Test.hpp"
+#include "area_and_perimeter_calculation.h"
+#include "input_test.h"
 #include <fstream>
+#include <iomanip>
 #include <iostream>
-#include <map>
-#include <sstream>
 #include <string>
 #include <vector>
 
@@ -112,15 +112,25 @@ int main(int argc, char** argv)
         }
     }
     if (flgc) {
+        cout << fixed;
         cout << "\n\n\n";
-        for (const auto& i : out)
+        for (const auto& i : out) {
             cout << i << endl;
+            cout << setprecision(3) << "\t perimeter = " << perimeter(i)
+                 << endl;
+            cout << setprecision(3) << "\t area = " << area(i) << "\n\n";
+        }
         cout << "\n\n\n";
         for (auto& i : er)
             cout << i.first << i.second << "\n\n";
     } else {
-        for (const auto& i : out)
+        for (const auto& i : out) {
+            fout << fixed;
             fout << i << endl;
+            fout << setprecision(3) << "\t perimeter = " << perimeter(i)
+                 << endl;
+            fout << setprecision(3) << "\t area = " << area(i) << "\n\n";
+        }
         fout << "\n\n\n";
         for (auto& i : er)
             fout << i.first << i.second << "\n\n";
