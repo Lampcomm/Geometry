@@ -8,10 +8,10 @@ DEPENDENCIES = $(patsubst $(addprefix build/, %.o), $(addprefix build/, %.d), $(
 all : $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJECTS)
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ -std=c++11
 
 build/%.o : src/%.cpp
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@ -std=c++11
 
 .PHONY:clean
 clean:
