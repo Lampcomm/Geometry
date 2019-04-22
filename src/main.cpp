@@ -1,6 +1,6 @@
-//#include "Test.hpp"
 #include "area_and_perimeter_calculation.h"
 #include "input_test.h"
+#include "intersection.h"
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -85,7 +85,7 @@ int main(int argc, char** argv)
                 er.push_back(ans);
             } else if (triangle(i) == 3) {
                 ans.first = i;
-                ans.second = "\n\n\tError: unknown shape '";
+                ans.second = "\n\tError: unknown shape '";
                 size_t is = 0;
                 temp.clear();
                 while (i[is] != '(' && i[is] != ')' && is < i.size()) {
@@ -99,7 +99,7 @@ int main(int argc, char** argv)
                 out.push_back(i);
         } else {
             ans.first = i;
-            ans.second = "\n\n\tError: unknown shape '";
+            ans.second = "\n\tError: unknown shape '";
             size_t is = 0;
             temp.clear();
             while (i[is] != '(' && i[is] != ')' && is < i.size()) {
@@ -114,22 +114,40 @@ int main(int argc, char** argv)
     if (flgc) {
         cout << fixed;
         cout << "\n\n\n";
-        for (const auto& i : out) {
-            cout << i << endl;
-            cout << setprecision(3) << "\t perimeter = " << perimeter(i)
+        for (size_t i; i < out.size(); i++) {
+            cout << out[i] << endl;
+            cout << setprecision(3) << "\t perimeter = " << perimeter(out[i])
                  << endl;
-            cout << setprecision(3) << "\t area = " << area(i) << "\n\n";
+            cout << setprecision(3) << "\t area = " << area(out[i]) << endl;
+            cout << "\t intersects:" << endl;
+            for (size_t j = 0; j < out.size(); j++) {
+                if (i == j)
+                    continue;
+                if (intersection(out[i], out[j])) {
+                    cout << "\t    " << j + 1 << ". " << out[j] << endl;
+                }
+            }
+            cout << "\n\n";
         }
         cout << "\n\n\n";
         for (auto& i : er)
             cout << i.first << i.second << "\n\n";
     } else {
-        for (const auto& i : out) {
+        for (size_t i = 0; i < out.size(); i++) {
             fout << fixed;
-            fout << i << endl;
-            fout << setprecision(3) << "\t perimeter = " << perimeter(i)
+            fout << out[i] << endl;
+            fout << setprecision(3) << "\t perimeter = " << perimeter(out[i])
                  << endl;
-            fout << setprecision(3) << "\t area = " << area(i) << "\n\n";
+            fout << setprecision(3) << "\t area = " << area(out[i]) << endl;
+            fout << "\t intersects:" << endl;
+            for (size_t j = 0; j < out.size(); j++) {
+                if (i == j)
+                    continue;
+                if (intersection(out[i], out[j])) {
+                    fout << "\t    " << j + 1 << ". " << out[j] << endl;
+                }
+            }
+            fout << "\n\n";
         }
         fout << "\n\n\n";
         for (auto& i : er)
