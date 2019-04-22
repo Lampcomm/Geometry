@@ -144,32 +144,31 @@ bool intersection(string a, string b)
         i += 2;
         ss.clear();
     }
-    for (int i = 0; i < 2; i++) {
-        for (j = i + 1; j < 3; j++) {
-            double c = bc[i].first * bc[j].second - bc[j].first * bc[i].second,
-                   a = bc[i].second - bc[j].second,
-                   b = bc[j].first - bc[i].first;
-            c += a * ac[0] + b * ac[1];
-            if (c * c < ac[2] * ac[2] * (a * a + b * b)) {
-                double d = ac[2] * ac[2] - c * c / (a * a + b * b);
-                double mult = sqrt(d / (a * a + b * b));
-                double ax, ay, bx, by;
-                double x0 = -a * c / (a * a + b * b),
-                       y0 = -b * c / (a * a + b * b);
-                ax = x0 + b * mult;
-                ay = y0 - a * mult;
-                bx = x0 - b * mult;
-                by = y0 + a * mult;
-                if (ax >= min(bc[i].first, bc[j].first)
-                    && ax <= max(bc[i].first, bc[j].first)
-                    && ay >= min(bc[i].second, bc[j].second)
-                    && ay <= max(bc[i].second, bc[j].second)) {
+    for (size_t i = 0; i < 2; i++) {
+        for (size_t j = 0; j < 3; j++) {
+            double k = (bc[j].second - bc[i].second)
+                    / (bc[j].first - bc[i].first),
+                   b = (bc[i].second * bc[j].first - bc[i].first * bc[j].second)
+                    / (bc[j].first - bc[i].first),
+                   a = (1 + k * k),
+                   bu = (-2 * ac[0] + 2 * k * b - 2 * ac[1] * k),
+                   c = ac[0] * ac[0] + b * b - ac[1] * ac[1] - 2 * ac[1] * b
+                    - ac[2] * ac[2],
+                   d = bu * bu - 4 * a * c;
+            if (d > 0) {
+                double x1 = (-bu + sqrt(d)) / (2 * a),
+                       x2 = (-bu - sqrt(d)) / (2 * a), y1 = k * x1 + b,
+                       y2 = k * x2 + b;
+                if (x1 >= min(bc[i].first, bc[j].first)
+                    && x1 <= max(bc[i].first, bc[j].first)
+                    && y1 >= min(bc[i].second, bc[j].second)
+                    && y1 <= max(bc[i].second, bc[j].second)) {
                     return true;
-                } else if (
-                        bx >= min(bc[i].first, bc[j].first)
-                        && bx <= max(bc[i].first, bc[j].first)
-                        && by >= min(bc[i].second, bc[j].second)
-                        && by <= max(bc[i].second, bc[j].second)) {
+                }
+                if (x2 >= min(bc[i].first, bc[j].first)
+                    && x2 <= max(bc[i].first, bc[j].first)
+                    && y2 >= min(bc[i].second, bc[j].second)
+                    && y2 <= max(bc[i].second, bc[j].second)) {
                     return true;
                 }
             }
