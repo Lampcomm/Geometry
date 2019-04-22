@@ -15,6 +15,6 @@ build/%.o : src/%.cpp
 
 .PHONY:clean
 clean:
-	rm $(OBJECTS) $(EXECUTABLE) $(DEPENDENCIES)
+	rm -f $(OBJECTS) $(EXECUTABLE) $(DEPENDENCIES)
 
 include $(wildcard $(addprefix build/, *.d))
