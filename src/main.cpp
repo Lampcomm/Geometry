@@ -114,7 +114,7 @@ int main(int argc, char** argv)
     if (flgc) {
         cout << fixed;
         cout << "\n\n\n";
-        for (size_t i; i < out.size(); i++) {
+        for (size_t i = 0; i < out.size(); i++) {
             cout << out[i] << endl;
             cout << setprecision(3) << "\t perimeter = " << perimeter(out[i])
                  << endl;
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
             }
             cout << "\n\n";
         }
-        cout << "\n\n\n";
+        cout << "Errors:\n\n";
         for (auto& i : er)
             cout << i.first << i.second << "\n\n";
     } else {
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
             }
             fout << "\n\n";
         }
-        fout << "\n\n\n";
+        fout << "Errors:\n\n";
         for (auto& i : er)
             fout << i.first << i.second << "\n\n";
     }
