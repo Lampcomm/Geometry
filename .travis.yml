@@ -4,6 +4,10 @@ compiler: gcc
 
 dist: xenial
 
+install:
+  - sudo apt-get install cxxtest
+
 script:
   - make
+  - make test
   - git ls-files src/ | xargs clang-format -i && git diff --exit-code
