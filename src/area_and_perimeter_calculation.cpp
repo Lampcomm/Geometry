@@ -3,8 +3,8 @@
 
 double perimeter(string s)
 {
-    pair<int, int> t;
-    pair<int, int> a[4];
+    pair<double, double> t;
+    pair<double, double> a[4];
     double ans = 0;
     string temp;
     stringstream ss;
@@ -47,8 +47,8 @@ double perimeter(string s)
 
 double area(string s)
 {
-    pair<int, int> t;
-    pair<int, int> a[4];
+    pair<double, double> t;
+    pair<double, double> a[4];
     string temp;
     stringstream ss;
     double ans = 1, p = 0, b[3];

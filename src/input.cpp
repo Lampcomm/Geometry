@@ -1,4 +1,4 @@
-#include "input_test.h"
+#include "input.h"
 
 int circle(string str)
 {
@@ -40,7 +40,8 @@ int circle(string str)
             j = i;
         } else {
             a = temp[i] - '0';
-            if ((a < 0 || a > 9) && temp[i] != '.' && temp[i] != ',') {
+            if ((a < 0 || a > 9) && temp[i] != '.' && temp[i] != ','
+                && temp[i] != '-') {
                 return 2;
             }
         }
@@ -113,8 +114,8 @@ int triangle(string str)
             }
         }
     }
-    set<pair<int, int>> se;
-    pair<int, int> t, b[4];
+    set<pair<double, double>> se;
+    pair<double, double> t, b[4];
     i = 10;
     j = 0;
     temp.clear();
