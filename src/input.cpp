@@ -1,4 +1,4 @@
-#include "input_test.h"
+#include "input.h"
 
 int circle(string str)
 {

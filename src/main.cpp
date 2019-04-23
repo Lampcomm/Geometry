@@ -1,5 +1,5 @@
 #include "area_and_perimeter_calculation.h"
-#include "input_test.h"
+#include "input.h"
 #include "intersection.h"
 #include <fstream>
 #include <iomanip>

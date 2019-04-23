@@ -1,5 +1,5 @@
-#ifndef _INPUT_TEST_H
-#define _INPUT_TEST_H
+#ifndef _INPUT_H
+#define _INPUT_H
 #include <set>
 #include <sstream>
 #include <string>
