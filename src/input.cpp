@@ -4,7 +4,8 @@ int circle(string str)
 {
     string cr = "circle";
     string temp;
-    int cp = 0, a, cz = 0;
+    int cp = 0, cz = 0;
+    double a;
     size_t i = 0, j = 0;
     while (str[i] != '(' && i < str.size()) {
         temp.push_back(str[i]);
@@ -57,7 +58,7 @@ int circle(string str)
         j++;
     }
     istringstream iss(te, istringstream::in);
-    int t;
+    double t;
     iss >> t;
     if (t <= 0)
         return 2;
